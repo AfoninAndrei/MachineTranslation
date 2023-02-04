@@ -8,3 +8,6 @@ kernel:
 
 build_docker:
 	docker build -t EN-RU-Translator:latest .
+
+start:
+	sh start.sh

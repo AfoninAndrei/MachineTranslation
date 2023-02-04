@@ -1,4 +1,9 @@
-uvicorn==0.15.0
-fastapi==0.70.0
-pandas==1.0.5
-numpy==1.18.5
+numpy==1.23.5
+uvicorn==0.20.0
+torch==1.13.1
+torchtext==0.14.1
+fastapi==0.89.1
+spacy==3.3.1
+joblib==1.2.0
+confection==0.0.4
+pymorphy2==0.9.1
