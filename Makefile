@@ -7,7 +7,7 @@ kernel:
 	python3 -m ipykernel install --user --name ${PACKAGE}
 
 build_docker:
-	docker build -t EN-RU-Translator:latest .
+	docker build --compress -t en-ru-translator:latest .
 
 start:
-	sh start.sh
+	(cd ./app/ && sh ../start.sh)
