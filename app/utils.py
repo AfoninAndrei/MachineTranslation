@@ -15,9 +15,11 @@ def load_modules() -> dict:
 
     # load vocabularly block (torchtext.vocab)
     vocab_transform = load(abs_path(CONFIG['VOCAB_PATH']))
+    SRC_VOCAB_SIZE = len(vocab_transform[CONFIG['SRC_LANGUAGE']])
+    TGT_VOCAB_SIZE = len(vocab_transform[CONFIG['TGT_LANGUAGE']])
 
     # load model for prediction
-    model = Seq2SeqTransformer(2, 2, 128, 2, 84617, 185478, 128)
+    model = Seq2SeqTransformer(2, 4, 64, 4, SRC_VOCAB_SIZE, TGT_VOCAB_SIZE, 64)
     model.load_state_dict(torch.load(abs_path(CONFIG['MODEL_PATH']),
                                      map_location=torch.device(CONFIG['DEVICE'])))
     model.eval()
