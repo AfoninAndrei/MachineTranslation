@@ -16,18 +16,22 @@ start_app_docker:
 	sh docker_run.sh
 
 start_app_k8s:
-	minikube start --memory 7600 \
-	eval $(minikube docker-env) \
-	build_docker \
-	kubectl apply -f deployment/deployment.yaml \
-	kubectl apply -f deployment/service.yaml \
+	minikube start --memory 7600 && \
+	eval $(minikube docker-env) && \
+	build_docker && \
+	kubectl apply -f deployment/deployment.yaml && \
+	kubectl apply -f deployment/service.yaml && \
 	minikube service mt-serving-service
+	# in another terminal potentially you can run: minikube dashboard
 
 stress_test_k8s_server:
-	minikube addons enable metrics-server \
+	minikube addons enable metrics-server && \
 	# check: kubectl get deployment metrics-server -n kube-system
-	sleep 10 \
-	kubectl apply -f deployment/autoscale.yaml \
+	sleep 10 && \
+	kubectl apply -f deployment/autoscale.yaml && \
 	# check: kubectl get hpa
-	sleep 10 \
+	sleep 10 && \
 	sh stresstest.sh
+
+clean_k8s:
+	kubectl delete -f deployment && minikube delete
