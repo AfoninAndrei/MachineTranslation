@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mt-serving-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mt-serving
+  template:
+    metadata:
+      labels:
+        app: mt-serving
+    spec:
+      containers:
+      - name: mt-serving
+        image: en-ru-translator:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "250m"
+          limits:
+            cpu: "500m"
